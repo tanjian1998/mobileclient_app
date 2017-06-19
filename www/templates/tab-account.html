@@ -1,0 +1,60 @@
+﻿<ion-view view-title="账户管理">
+	<ion-nav-buttons side="left">
+      <button class="button  icon-left ion-star button-calm" ng-click="personSetting()">
+        <!--修改设置{{ $scope.resMsg}}-->
+        编辑当前用户
+      </button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+      <button class="button  button-positive  icon-right ion-navicon" ng-click="registePerson()">
+         <!--注册用户-->
+         注册管理员
+      </button>
+    </ion-nav-buttons>
+  <ion-content>
+    <!--<ion-list>
+    <ion-toggle  ng-model="settings.enableFriends">
+        Enable Friends
+    </ion-toggle>
+    </ion-list>-->
+    <div class="list">
+
+     <label class="item item-input">
+     	当前用户：
+          <input type="text" required placeholder="您的名字?" ng-model="curUser.name">
+        <!--
+          -->
+     </label>
+		 <label class="item item-input">
+		 	密码：
+          <input type="password" required placeholder="密码?" ng-model="curUser.alias">
+        <!--
+          -->
+     </label>
+     <label class="item item-input">
+     	职位：
+          <input type="text" placeholder="职位?" ng-model="curUser.title">
+        <!--
+          -->
+     </label>
+          <label class="item item-input">
+          	年龄：
+          <input type="text" placeholder="年龄?" ng-model="curUser.age">
+        <!--
+          -->
+     </label>
+     </label>
+     
+          <label class="item item-input">手机号码：
+          <input type="text" placeholder="手机号码?" required ng-model="curUser.mobile">
+        <!--
+          -->
+     </label>
+       <label class="item item-input">
+           <button class="button  button-positive" ng-click="outRegister()">
+        退出登陆
+      </button>
+       </label>
+</div>
+  </ion-content>
+</ion-view>

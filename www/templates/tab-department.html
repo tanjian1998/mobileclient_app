@@ -1,0 +1,70 @@
+﻿<ion-view view-title="部门体系">
+  <ion-content>
+<!-- 已废弃-->
+	<!--<ion-tree-list items="departments" collapsed="true" template-url="./templates/tab-department-persons.html"  class="item positive"></ion-tree-list>-->
+
+
+
+    <!-- Nested node template -->
+    <script type="text/ng-template" id="nodes_renderer.html">
+      <div class="tree-node tree-node-content row">
+        <h2 >
+          <div class="button-bar bar-calm ">         <a data-nodrag>
+
+           <i  ng-if="node.persons && node.persons.length > 0"
+               ng-class="{
+          'icon ion-arrow-right-b': !collapsed,
+          'icon ion-arrow-down-b': collapsed
+        }" ></i>&nbsp;&nbsp;
+
+            <i class="icon ion-chevron-right icon ion-person-stalker"  ng-if="node.persons && node.persons.length > 0" ng-click="toggle({{node}})"> {{node.name}}</i></a>
+
+          <button  ng-if="node.persons && node.persons.length > 0" class="button button-positive  button-clear " data-nodrag ng-click="groupchat({{node}});return false;">
+            <i
+              class="icon ion-chatboxes"  ></i>
+            <!--&nbsp;群聊-->
+          </button>&nbsp;&nbsp;
+          <button  ng-if="node.persons && node.persons.length > 0" class="button button-calm  button-clear " data-nodrag ng-click="groupLocating({{node}});return false;">
+            <i
+              class="icon ion-android-map" > </i>
+            <!--&nbsp;群体定位-->
+          </button>
+      </div>
+        </h2>
+      </div>
+
+
+
+      <ion-list  ng-if="node.persons && node.persons.length > 0 && collapsed" >
+        <ion-item class="item-remove-animate item-avatar item-icon-right calm-bg"  ng-if="node.persons && node.persons.length > 0 && collapsed"  ui-tree-node   ng-repeat="person in node.persons"  type="item-text-wrap" href="#/tab/chats/{{person.chatid}}">
+          <!-- <img ng-src="{{chat.face}}"><span class="badge badge-assertive">{{chat.msgNums}}</span>-->
+          <!-- 这里可以用来显示人-->
+          <i class="icon ion-chevron-left  icon ion-person balanced-bg"> <h2>{{person.person.name}}</h2></i>
+          <!-- 这里可以用来做人员的操作-->
+          <ion-option-button class="button-positive" ng-click="chatTo('{{person.person._id}}')">
+            聊天
+          </ion-option-button>
+        </ion-item>
+      </ion-list>
+
+      <ol ui-tree-nodes="" ng-model="node.Departments" ng-class="{hidden: collapsed}">
+        <li ng-repeat="node in node.Departments" ui-tree-node ng-include="'nodes_renderer.html'">
+
+        </li>
+      </ol>
+    </script>
+
+
+
+
+    <div ui-tree>
+      <ol ui-tree-nodes="" ng-model="alldepartments">
+        <!--ng-include="'nodes_renderer.html'"-->
+        <li ng-repeat="node in alldepartments.Departments" ui-tree-node ng-include="'nodes_renderer.html'">
+      </li>
+      </ol>
+    </div>
+
+
+  </ion-content>
+</ion-view>

@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta  http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+  
+		<script type="text/javascript" language="javascript">   
+			function iFrameHeight() {   
+			var ifm= document.getElementById("iframepage");   
+			var subWeb = document.frames ? document.frames["iframepage"].document : ifm.contentDocument;   
+			if(ifm != null && subWeb != null) {
+			   ifm.height = subWeb.body.scrollHeight-150;
+			   ifm.width = subWeb.body.scrollWidth;
+			   //alert('ok');
+			}   
+			}      
+		</script>
+  </head>
+  
+     
+  <body >
+  	<img src="./img/header.png" height="150" width="100%"/>
+  
+	<iframe src="./shouji.html" id="iframepage" height="800" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" onLoad="iFrameHeight()"></iframe>
+  </body>
+</html>

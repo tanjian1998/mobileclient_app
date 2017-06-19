@@ -1,0 +1,140 @@
+﻿var accountctr=angular.module('starter.controllers');
+accountctr.controller('AccountCtrl', function($scope,$rootScope,$state, $ionicBackdrop,$ionicPopup, $http,$ionicModal) {
+	 $scope.settings = {
+    enableFriends: true
+  };
+  
+  $scope.outRegister= function(){
+  	curUser='';
+  	$rootScope.hideAccount=true;
+  	$rootScope.editable=false;
+  	
+		$state.go('tab.dash');
+  	};
+  
+      $scope.curUser=curUser;
+      //alert(curUser);
+    	$scope.person;//;
+    	/*{._id
+		    'name': '123',
+				'alias':'123',
+				'title':'123',
+				'mobile':'123',
+				'age':'123'
+		};*/          
+    // 生成模态窗口
+
+		$scope.personModal;//模态窗口包括新建注册、和编辑当前
+		
+		$scope.personSetting= function() {
+			if(!curUser)return;
+			// 生成关于模态窗口
+			$ionicModal.fromTemplateUrl('templates/account-edit.html', {
+					scope: $scope,
+					animation: 'slide-in-up'		
+			}).then( function(modal) 
+			{		
+				$scope.personModal = modal;// 创建模态窗口 personModal
+
+				$scope.personModal.show();
+			}); 
+				
+		
+		};
+		
+		
+		
+		// 全局方法：打开窗口		
+		$scope.newperson = function() {
+			//if(!curUser)
+			// 生成关于模态窗口
+			$ionicModal.fromTemplateUrl('templates/account-new.html', {
+					scope: $scope,
+					animation: 'slide-in-up'		
+			}).then( function(modal) 
+			{		
+				$scope.personModal = modal;// 创建模态窗口 personModal
+
+				$scope.personModal.show();
+			}); 
+				
+		
+		};
+		
+		
+		
+		// 全局方法：关闭窗口		
+		$scope.closeNewperson = function() {
+		
+		     $scope.personModal.remove();
+		
+		};
+		
+		//编辑当前用户
+		$scope.editcurPerson= function() {
+			//超级用户不可编辑
+			if($scope.curUser.name=='admin'){return;};
+			//lert(123);
+			//保存提交到服务器	
+			$http({  
+	         method:'POST',
+	         url:'http://58.64.149.165:2000/person/edit',  
+	         data:$scope.curUser,
+	        //params:[data:$scope.movieTestData ],
+	         headers: {'Content-Type': 'application/json;charset=utf-8'},
+	         dataType:'JSON'
+	         })
+			.success(function(data,status,headers,config){ 
+								alert("用户修改成功！");
+								curUser=$scope.curUser;
+	              $scope.resMsg=data;
+	              if(status==200){$scope.personModal.hide();$scope.person={};$scope.personModal.$scope=$scope;};
+	         }).error(function(data,status,headers,config){  
+	              
+	         });  
+			
+				$scope.personModal.remove();
+		};
+
+		
+		//Called when the form is submitted
+		$scope.createperson = function(person) {
+		
+		$scope.person={
+		    'name': person.name+'',
+				'alias':person.alias+'',
+				'title':person.title+'',
+				'mobile':person.mobile+'',
+				'age':person.age+'',
+				'pwd':person.pwd+''
+		};/**/
+		//保存提交到服务器	
+		$http({  
+         method:'POST',
+         url:'http://58.64.149.165:2000/person/add',  
+         data:$scope.person,
+        //params:[data:$scope.movieTestData ],
+         headers: {'Content-Type': 'application/json;charset=utf-8'},
+         dataType:'JSON'
+         })
+		.success(function(data,status,headers,config){ 
+							alert("用户注册成功！");
+              $scope.resMsg=data;
+              if(status==200){$scope.personModal.hide();$scope.person={};$scope.personModal.$scope=$scope;};
+         }).error(function(data,status,headers,config){  
+              
+         });  
+		
+		$scope.personModal.remove();
+		
+		//person.name = "";
+		
+		};
+              
+		//右上角的地图设置
+		$scope.registePerson=function(){
+		$scope.newperson();};
+
+
+
+})

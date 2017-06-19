@@ -1,0 +1,50 @@
+﻿<ion-view view-title="政务管理(开发中)">
+  <ion-content  style="height:100%;width: 100%">
+
+	<div class="row" style="height:{{rowHeight}}px">
+	  <div class="col col-50  col-center positive-bg light" style="height:100%;width: 100%">  <!--  style="height:100px"-->
+ 	     <a class="button button-positive icon-top icon ion-plane" style="height:100%;width: 100%"  href="#/tab/managementschedule"><br>办公日程
+ 	     </a>
+	  </div>
+	   <div class="col col-25 col-center light">
+	   				<div class="row assertive-bg row-top" style="height:{{rowHeight/2}}px">
+	          	<button class="button  button-assertive  ion-android-train"  style="height:100%;width: 100%">月</button>
+
+	          </div>
+	          <div class="row dark-bg row-bottom" style="height:{{rowHeight/2}}px">
+	          	<button class="button  button-dark  ion-android-train"  style="height:100%;width: 100%">周</button>
+	          </div>
+	   </div>
+	   <div class="col col-25 col-center light calm-bg"  style="height:100%;width: 100%" >	      <!-- -->
+	        <button class="button  button-calm ion-model-s"  style="height:100%;width: 100%"><br></>事务</button>
+	   </div>
+	</div>
+
+		<div class="row" style="height:{{rowHeight}}px">
+	  <div class="col col-50  col-center calm-bg light" style="height:100%;width: 100%">  <!--  style="height:100px"-->
+ 	     <!--<button class="button button-calm icon-top icon ion-home" style="height:100%;width: 100%"><br></>辖区设施</button>-->
+ 	     	<a class="button button-calm icon-top icon ion-home" style="height:100%;width: 100%"  href="#/tab/managementinstallations"><br>辖区设施
+ 	     </a>
+	  </div>
+
+	   <div class="col col-50 col-center light stable-bg"  style="height:100%;width: 100%" >	      <!-- -->
+	        <button class="button  button-stable ion-person"  style="height:100%;width: 100%" ng-click="onClickShowChatDetail()"><br></>辖区人员</button>
+	   </div>
+	</div>
+
+  <div class="row" style="height:{{rowHeight}}px">
+   <div class="col  balanced-bg light" style="height:100%;width: 100%">
+
+              <a class="button button-balanced icon-top icon ion-image" style="height:100%;width: 100%" href="#/tab/managementreport"><br></>案件速报</a>
+   </div>
+   <div class="col energized-bg light" style="height:100%;width: 100%">
+
+              <button class="button button-energized icon-top icon ion-pricetag" style="height:100%;width: 100%"><br></>动态登记</button>
+   </div>
+   <div class="col  royal-bg light" style="height:100%;width: 100%">
+
+               <button class="button button-royal icon-top icon ion-person-stalker" style="height:100%;width: 100%"><br></>人员管理</button>
+   </div>
+  </div>
+  </ion-content>
+</ion-view>

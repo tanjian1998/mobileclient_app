@@ -1,0 +1,6 @@
+﻿<ion-view view-title="部门体系">
+  <ion-content>
+<!-- -->
+	<ion-tree-list items="departments" collapsed="true" template-url="./templates/tab-department-persons.html"></ion-tree-list>
+  </ion-content>
+</ion-view>

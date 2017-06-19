@@ -1,0 +1,131 @@
+﻿
+ <style type="text/css">
+ 
+map {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.scroll {
+  height: 100%;
+}
+
+ .info {
+      border: solid 1px silver;
+  }
+  div.info-top {
+      position: relative;
+      background: none repeat scroll 0 0 #F9F9F9;
+      border-bottom: 1px solid #CCC;
+      border-radius: 5px 5px 0 0;
+  }
+  div.info-top div {
+      display: inline-block;
+      color: #333333;
+      font-size: 14px;
+      font-weight: bold;
+      line-height: 31px;
+      padding: 0 10px;
+  }
+  div.info-top img {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      transition-duration: 0.25s;
+  }
+  div.info-top img:hover {
+      box-shadow: 0px 0px 5px #000;
+  }
+  div.info-middle {
+      font-size: 12px;
+      padding: 6px;
+      line-height: 20px;
+  }
+  div.info-bottom {
+      height: 0px;
+      width: 100%;
+      clear: both;
+      text-align: center;
+  }
+  div.info-bottom img {
+      position: relative;
+      z-index: 104;
+  }
+  span {
+      margin-left: 5px;
+      font-size: 11px;
+  }
+  .info-middle img {
+      float: left;
+      margin-right: 6px;
+  }
+</style>
+ 
+<ion-view view-title="网格化地图">
+ <ion-nav-buttons side="left"> <!--
+ 	      <button class="button  button-icon icon ion-navicon" ng-click="locationAppSetting()">
+       
+        登录
+      </button>
+      <button class="button  button-icon icon ion-navicon" ng-click="login()">
+
+        注册
+      </button>
+ 	-->
+
+      <button class="button  button-icon icon ion-ios-toggle" ng-click="realtimeMapSetting()">
+         
+      </button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+     <button class="button  button-icon icon ion-gear-b" ng-click="mapSetting()">
+         地图设置
+      </button>
+    </ion-nav-buttons>
+    <ion-content  scroll="false">
+    	<div id="" class="bar bar-header" ng-show='btnBarShow'>
+ 
+  <div class="button-bar">
+  <!--<a class="button button-positive" href="#/tab/dashbuilding">文化遗产</a>-->  
+  <button class="button button-positive" ng-click="draw()">文化遗产</button>
+  <a class="button button-calm" ng-click="beginDraw('I')">特定建筑</a>
+  <a class="button button-balanced" ng-click="closeInfoWindow()">男员工</a>
+  <a class="button button-balanced" ng-click="closePoints()">女员工</a>
+  <a class="button button-dark"  ng-click="loadHeritagePoints()">车辆设备</a>
+</div>
+</div>
+
+ <!--切换开关-->
+ <div class="list" ng-show='btntoggleShow'>
+    
+    <div class="item item-divider"> 
+      地图实时显示设置
+    </div>
+    
+    
+    <ion-toggle ng-model="isShowUnderling "
+                ng-change="ShowUnderling()">
+      是否显示本部门人员
+    </ion-toggle>
+    
+
+    
+    <ion-toggle toggle-class="toggle-positive"
+                ng-model="isShowGrid"
+                ng-change="changeShowGrid()">
+      是否显示网格
+    </ion-toggle>
+    
+    
+        <ion-toggle toggle-class="toggle-calm"
+                ng-model="isShowEvents"
+                ng-change="ShowEvents()">
+      是否显示待处理事件
+    </ion-toggle>
+
+  </div>
+
+      <map id="container" on-create="mapCreated(map)"></map>
+    </ion-content>
+ 
+</ion-view>

@@ -1,0 +1,425 @@
+﻿// Ionic Starter App
+var curUser='';
+
+var curMapObj;
+var panobaseurl="../img/pano/";
+var firstpanourl="sun.jpg";
+//图片文件由服务器提供访问，为了使用方便
+var hpImgBaseUrl="http://58.64.149.165:2000/hpImg/";
+var hpPanoBaseUrl="http://58.64.149.165:2000/pano/";
+
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'chart.js', 'starter.directives', 'ionic.wizard','ngCordova', 'ion-tree-list'])
+
+.run(function($ionicPlatform, $rootScope,$timeout,$cordovaDevice,$ionicActionSheet, $timeout, $cordovaAppVersion, 
+$state,$http,HeritagePoints,$ionicPopup, 
+$ionicLoading, $cordovaFileTransfer, $cordovaFile, $cordovaFileOpener2) 
+{
+	$rootScope.editable=false;
+	//true表示隐藏用户管理标签，显示其他功能标签，用于已经登录用户后的使用操作
+	//false表示。。。
+  $rootScope.hideAccountTab=true;
+  //true表示在桌面系统上测试，不用通过手机uuid获取用户了
+  $rootScope.dstpTest=false;
+  //当前的地图跟踪对象
+  $rootScope.focusMapObject;
+  //当前用户的地图标注对象
+  $rootScope.curUserMapIcon;
+	$rootScope.locationRefreshTime=10000;//刷新定位数据的时段，默认10000，十秒
+	//调用手机相机拍身份证照片的配置
+	$rootScope.IDCardOptions={
+		quality: 100,
+		targetWidth: 700,
+		targetHeight: 440,
+//		width: 700,
+//		height: 440,
+		//destinationType: navigator.camera.DestinationType.DATA_URL,//FILE_URI,//DATA_URL,//带navigator的这几句都容易报错
+		//sourceType: navigator.camera.PictureSourceType.CAMERA,
+		allowEdit: true,
+		//encodingType: navigator.camera.EncodingType.JPEG,
+		saveToPhotoAlbum: true,
+		correctOrientation:true
+		};
+	//调用手机相机拍摄普通照片的配置
+	$rootScope.CommonImgOptions = {
+		quality: 75,
+		targetWidth: 800,
+		targetHeight: 1200,
+		saveToPhotoAlbum: false
+	};
+	//应用服务器网址
+	$rootScope.applicationServer = 'http://120.76.228.172:2000';
+	//发布服务器网址
+	$rootScope.publishServer = 'http://120.76.228.172:2000';
+	//当前用户，一切操作的基础
+	$rootScope.curUser={
+    name:'',			//姓名 
+    sex:'',			//性别 
+    nation:'',		//民族 
+    birthday:'',		//生日 
+    residence:'',		//住所 
+    idNum:'',			//身份证号码 
+    side:'',		//值为'obverse' 
+    
+    idUrl:'',			//身份证图片地址 
+    mobile:'',			//手机号码 
+    mobileUUid:''		//手机UUID
+	};
+	
+	//根据设备uuid获得用户
+	$rootScope.refreshCurUser=function(callback) {
+		var uuid = $cordovaDevice.getUUID();
+		//alert("手机uuid："+uuid);						              			
+    $http({  
+         method:'POST',
+         url:$rootScope.applicationServer+'/person/getPersonByUUId',  
+         data:{"mobileUUid":uuid},
+        //params:[data:$scope.movieTestData ],
+         headers: {'Content-Type': 'application/json;charset=utf-8'},
+         dataType:'JSON'
+         })
+		.success(function(data,status,headers,config){ 
+							//alert("用户修改成功！");
+							//curUser=$scope.curUser;
+              //$scope.resMsg=data;
+              if(status==200){
+              	if (data.err) {
+              		  //查询出错
+              			$rootScope.curUser=null;
+              	}else if (data.name) {
+              		//将查询来的用户信息赋给本地全局对象
+              			$rootScope.curUser=data;
+              			//只要有用户就进入地图
+        						$state.go('tab.dash');
+        						//如果没有用户，自然默认就是导航页面    
+              	}
+              	}else {
+              		alert("网络异常，请稍后重试："+status);
+              	};
+              if (callback) {
+								callback($rootScope.curUser);
+				     }
+							$ionicLoading.hide();
+         }).error(function(data,status,headers,config){  
+              alert("网络中断导致未能识别，请稍后再试！");
+              
+							$ionicLoading.hide();
+							if (callback) {
+								callback($rootScope.curUser);
+				     }
+         });
+
+	};
+	
+	//这个有意义，就是ionic的运行环境准备好了，跟cordova沟通好了，cordova跟硬件设备沟通好了
+	//这之后，才能安全地调用硬件设备，这个想法大概是，缺乏全面测试
+  $ionicPlatform.ready(function() {
+    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+    // for form inputs)
+    if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+      cordova.plugins.Keyboard.disableScroll(true);
+	
+
+
+    }
+    if (window.StatusBar) {
+      // org.apache.cordova.statusbar required
+      StatusBar.styleDefault();
+    }
+    
+		 //延迟splash screnn 隐藏时间,不然会有短暂的白屏出现  
+		 setTimeout(function () {  
+		     navigator.splashscreen.hide();  
+		 }, 1000); 
+    		
+     //服务器上保存版本信息  
+    //alert("====>>服务器"+$rootScope.publishServer+'/app/ver.json'+"<>");    
+    $http.get($rootScope.publishServer+'/app/ver.json').then(function(data){     
+       //alert("====>>服务器"+data+"<>");    
+        var serverAppVersion = data.data.verInfo;//服务器ver.json 版本verInfo    
+       //alert("====>>服务器"+serverAppVersion);    
+        //android平台中打开AndroidManifest.xml文件可以设置当前apk版本号
+        $cordovaAppVersion.getVersionNumber().then(function(version) {    
+            //alert("version=====本机>>>"+version+"====>>服务器"+serverAppVersion);    
+            if (version != serverAppVersion) {    
+//                $ionicLoading.show({    
+//                    template: "已经下载：0%"    
+//                });    
+                var url = $rootScope.publishServer+"/app/"+data.data.apkName+".apk";     //服务器ver.json apk 文件名apkName  
+                var targetPath = "file:///mnt/sdcard/Download/android-debug.apk";     
+                var trustHosts = true    
+                var options = {};    
+                //alert("开始下载>>>"+ $cordovaFileTransfer+"<<====>>"+url+"<<====>>"); 
+                $cordovaFileTransfer.download(url, targetPath, options, trustHosts).then(function (result) {  
+            				//alert("开始下载>>>"+result+"====>>服务器");      
+                    $cordovaFileOpener2.open(targetPath, 'application/vnd.android.package-archive'    
+                    ).then(function () {    
+                        }, function (err) {    
+                        });    
+//                    $ionicLoading.hide();    
+                }, function (err) {    
+                    alert('下载失败'+err);    
+                }, function (progress) {                               
+                    $timeout(function () {    
+                        var downloadProgress = (progress.loaded / progress.total) * 100;    
+//                        $ionicLoading.show({    
+//                            template: "已经下载：" + Math.floor(downloadProgress) + "%"    
+//                        });    
+                        if (downloadProgress > 99) {    
+//                            $ionicLoading.hide();    
+                        }    
+                    })    
+                });    
+            }    
+        });    
+    }); 		
+    		
+	  //启动时就刷新一下用户       
+	  $rootScope.refreshCurUser();
+  });
+
+
+  
+})
+
+.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $httpProvider) {
+		// Use x-www-form-urlencoded Content-Type
+		//在客户端做跨域好像是没有用的
+    //$httpProvider.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
+    
+    //把tabs的按钮放在app下面，否则默认在上面，不便操作
+    $ionicConfigProvider.platform.ios.tabs.style('standard');
+		$ionicConfigProvider.platform.ios.tabs.position('bottom');
+		$ionicConfigProvider.platform.android.tabs.style('standard');
+		$ionicConfigProvider.platform.android.tabs.position('bottom');
+		$ionicConfigProvider.platform.ios.navBar.alignTitle('center');
+		$ionicConfigProvider.platform.android.navBar.alignTitle('center');
+		$ionicConfigProvider.platform.ios.backButton.previousTitleText('').icon('ion-ios-arrow-thin-left');
+		$ionicConfigProvider.platform.android.backButton.previousTitleText('').icon('ion-android-arrow-back');
+		$ionicConfigProvider.platform.ios.views.transition('ios');
+		$ionicConfigProvider.platform.android.views.transition('android');
+  // Ionic uses AngularUI Router which uses the concept of states
+  // Learn more here: https://github.com/angular-ui/ui-router
+  // Set up the various states which the app can be in.
+  // Each state's controller can be found in controllers.js
+  $stateProvider
+  //开始的导航界面
+      .state('main', {
+          url: '/start',
+          abstract: true,
+          template: '<ion-nav-view></ion-nav-view>'
+      })
+
+      .state('main.intro', {
+          url: '/intro',
+          templateUrl: 'templates/intro.html',
+          controller: 'IntroCtrl'
+      })
+  // setup an abstract state for the tabs directive
+  //原始示例是虚状态，这里改成实的，就有controller了，可以设置一些状态。
+    .state('tab', {
+    url: '/tab',
+    //cache: false,//貌似这个属性没有用
+    //abstract: true,
+    templateUrl: 'templates/tabs.html',
+    controller: 'TabCtrl'
+  })
+
+  // Each tab has its own nav history stack:
+  //就是地图页面
+  .state('tab.dash', {
+    url: '/dash',
+    views: {
+      'tab-dash': {
+        templateUrl: 'templates/tab-map.html',
+        controller: 'MapCtrl'
+      }
+    }
+  })
+  //这个是用webgl看三维建筑物的页面
+  .state('tab.dash-building', {
+    url: '/dashbuilding',
+    cache: false,
+    views: {
+      'tab-dash': {
+      	
+        templateUrl: 'templates/tab-map-3dbuilding.html',
+        controller: '3dbuildingCtrl'
+      }
+    }
+  })
+  .state('tab.pano', {
+    url: '/pano',
+    views: {
+      'tab-pano': {
+        templateUrl: 'templates/tab-pano.html',
+        controller: 'panoCtrl'
+      }
+    }
+  })    .state('tab.pano-detail', {
+      url: '/pano/:panoId',
+      cache: false,
+      views: {
+      'tab-pano': {
+        templateUrl: 'templates/tab-pano.html',
+        controller: 'panoCtrl'
+      }
+      }
+    })
+    .state('tab.chats', {
+      url: '/chats',
+      views: {
+        'tab-chats': {
+          templateUrl: 'templates/tab-chats.html',
+          controller: 'ChatsCtrl'
+        }
+      }
+    })/**/
+     .state('tab.chat-detail', {
+      url: '/chats/:chatId',
+      cache: false,
+      views: {
+        'tab-chats': {
+          templateUrl: 'templates/chat-detail.html',
+          controller: 'ChatDetailCtrl'
+        }
+      }
+    })
+  .state('tab.account', {
+    url: '/account',
+    views: {
+      'tab-account': {
+        templateUrl: 'templates/tab-account.html',
+        controller: 'AccountCtrl'
+      }
+    }
+  })  
+  .state('tab.account-login', {
+    url: '/accountlogin',
+    views: {
+      'tab-account': {
+        templateUrl: 'templates/tab-account-login.html',
+        controller: 'AccountLoginCtrl'
+      }
+    }
+  })
+   .state('tab.account-login-step1', {
+    url: '/accountlogin1',
+    views: {
+      'tab-account': {
+        templateUrl: 'templates/tab-account-login1.html',
+        controller: 'AccountLoginCtrl'
+      }
+    }
+  })   
+  .state('tab.account-login-step2', {
+    url: '/accountlogin2',
+    views: {
+      'tab-account': {
+        templateUrl: 'templates/tab-account-login2.html',
+        controller: 'AccountLoginCtrl'
+      }
+    }
+  })
+  //政务管理
+   .state('tab.management', {
+    url: '/management',
+    views: {
+      'tab-management': {
+        templateUrl: 'templates/tab-management.html',
+        controller: 'ManagementCtrl'
+      }
+    }
+  }) 
+  //部门管理
+  .state('tab.department', {
+    url: '/department',
+    views: {
+      'tab-department': {
+        templateUrl: 'templates/tab-department.html',
+        controller: 'DepartmentCtrl'
+      }
+    }
+  }) 
+  .state('tab.management-schedule', {
+    url: '/managementschedule',
+    cache: false,
+    views: {
+      'tab-management': {
+        templateUrl: 'templates/tab-management-schedule.html',
+        controller: 'ManagementScheduleCtrl'
+      }
+    }
+  })
+  //各类事件的上报
+  .state('tab.management-report', {
+    url: '/managementreport',
+    cache: false,
+    views: {
+      'tab-management': {
+        templateUrl: 'templates/tab-management-report.html',
+        controller: 'ManagementReportCtrl'
+      }
+    }
+  })  
+  //行政管理，上报信息
+  .state('tab.management-sendmessage', {
+    url: '/managementsendmessage',
+    cache: false,
+    views: {
+      'tab-management': {
+        templateUrl: 'templates/tab-management-sendmessage.html',
+        controller: 'ManagementReportCtrl'
+      }
+    }
+  })
+  .state('tab.management-installations', {
+    url: '/managementinstallations',
+    cache: false,
+    views: {
+      'tab-management': {
+        templateUrl: 'templates/tab-management-installations.html',
+        controller: 'ManagementInstallationsCtrl'
+      }
+    }
+  })
+  //本地要闻系列
+   .state('tab.news', {
+    url: '/news',
+    views: {
+      'tab-news': {
+        templateUrl: 'templates/tab-news.html',
+        controller: 'NewsCtrl'
+      }
+    }
+  })
+  //本地要闻系列的详细页面
+  .state('tab.news-detail', {
+      url: '/news/:hpdetailId',
+      cache: false,
+      views: {
+      'tab-news': {
+        templateUrl: 'templates/tab-news.html',
+        controller: 'NewsCtrl'
+      }
+      }
+    })	
+    .state('tab.news-item', {
+    url: '/news/item/:itemid',
+    cache: false,
+     views: {
+      'tab-news': {
+        templateUrl: 'templates/tab-account.html',
+        controller: 'ManagementCtrl'
+      }
+    }
+  });
+  ;
+
+  // if none of the above states are matched, use this as the fallback
+  //$urlRouterProvider.otherwise('/tab/dash');
+    // if none of the above states are matched, use this as the fallback
+  $urlRouterProvider.otherwise('/start/intro');
+
+});
+

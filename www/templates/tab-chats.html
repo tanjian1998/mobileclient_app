@@ -1,0 +1,63 @@
+﻿<ion-view view-title="工作消息">
+  <ion-content delegate-handle="messageScroll"  id="messagelist-content">
+
+
+    <ion-refresher pulling-text="刷新部门和人员..." on-refresh="doRefresh()" pulling-icon="bubbles" class="spinner-balanced"></ion-refresher>
+
+      <!--<ion-list rj-close-back-drop  on-swipe-left="onSwipeLeft()">-->
+        <!--<ion-item class="item-avatar" ng-class="{'rj-item-top': message.isTop}" on-hold="popupMessageOpthins(message)" rj-hold-active ng-repeat="message in messages | orderBy:['isTop', 'lastMessage.timeFrome1970']:true" ng-click="messageDetils(message)">-->
+          <!--<img ng-src="{{message.pic}}">-->
+          <!--<span class="rj-sm-red-icon" ng-show="message.showHints"><p ng-bind="message.noReadMessages"></p></span>-->
+          <!--<h2 ng-bind="message.name"></h2>-->
+          <!--<p class="rj-list-p" ng-bind="message.lastMessage.content"></p>-->
+          <!--<span class="rj-push-right" ng-bind="message.lastMessage.time"></span>-->
+        <!--</ion-item>-->
+      <!--</ion-list>-->
+
+
+    <!-- Nested node template -->
+    <script type="text/ng-template" id="nodes_renderer.html">
+      <div class="tree-node tree-node-content row">
+        <h2 >
+          <div class="button-bar bar-calm ">         <a data-nodrag>
+
+            <i  ng-if="node.persons && node.persons.length > 0"
+                ng-class="{
+          'icon ion-arrow-right-b': collapsed,
+          'icon ion-arrow-down-b': !collapsed
+        }" ></i>&nbsp;&nbsp;
+
+            <i class="icon ion-chevron-right icon ion-person-stalker"  ng-if="node.persons && node.persons.length > 0" ng-click="toggle({{node}})"> {{node.name}}</i></a>
+
+          </div>
+        </h2>
+      </div>
+      <!--ng-if="node.persons && node.persons.length > 0 && collapsed"-->
+      <!--ng-if="person.person.messagecount > 0" on-swipe-left="onSwipeLeft()" -->
+      <ion-list   rj-close-back-drop  ng-if="node.persons && node.persons.length > 0 && !collapsed" >
+        <!--ng-if="person.person.messageabstract"on-hold="popupMessageOpthins(person.person)" ng-repeat="person in node.persons| orderBy:'person.messagelastTime'" -->
+        <ion-item class="item-avatar" ng-class="{'rj-item-top': person.person.isTop}" ng-if="person.person && person.person._id!=curUser._id  && person.person.name!='admin'"  rj-hold-active ng-repeat="person in node.persons" ng-click="messageDetils(person.person)">
+          <img ng-src="data:image/jpeg;base64,{{person.person.images.coverSmall}}">
+          <span class="rj-sm-red-icon" ng-show="person.person.messagecount"><p ng-bind="person.person.messagecount"></p></span>
+          <h2 ng-bind="person.person.name"></h2>
+          <p class="rj-list-p" ng-bind="person.person.messageabstract"></p>
+          <span class="rj-push-right" ng-bind="person.person.messagelastTime"></span>
+        </ion-item>
+      </ion-list>
+
+      <ol ui-tree-nodes="" ng-model="node.Departments" ng-class="{hidden: collapsed}">
+        <li ng-repeat="node in node.Departments" ui-tree-node ng-include="'nodes_renderer.html'">
+
+        </li>
+      </ol>
+    </script>
+
+    <div ui-tree>
+      <ol ui-tree-nodes="" ng-model="alldepartmentsAndPersonMessages">
+        <!--ng-include="'nodes_renderer.html'"-->
+        <li ng-repeat="node in alldepartmentsAndPersonMessages"  ng-if="!node.isDeleted" ui-tree-node ng-include="'nodes_renderer.html'">
+        </li>
+      </ol>
+    </div>
+  </ion-content>
+</ion-view>

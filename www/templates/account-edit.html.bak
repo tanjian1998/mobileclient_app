@@ -1,0 +1,99 @@
+﻿<div class="modal">
+
+
+
+<!-- 窗口标题和取消按钮 -->
+
+<ion-header-bar class="bar-secondary">
+
+     <h1 class="title">编辑管理员账户</h1>
+
+     <button class="button button-clear button-positive" ng-click="closeNewperson()">取消</button>
+
+</ion-header-bar>
+
+
+
+<!-- 窗口内容
+var PersonSchema = new Schema({
+name : String,
+alias : [String],
+title : String,
+age:Number,
+create_date : { type: Date, default: Date.now},
+images :{
+coverSmall:String,
+coverBig:String,
+},
+source :String,
+link:String,
+lastmessageFK:Schema.Types.ObjectId,
+lastLocationFK:Schema.Types.ObjectId,
+lastmessage:String,
+lastLocation:String
+/**/
+});
+ <input type="text" placeholder="有哪些事情需要记录?" ng-model="person.alias">
+          <input type="text" placeholder="有哪些事情需要记录?" ng-model="person.title">
+          <input type="text" placeholder="有哪些事情需要记录?" ng-model="person.age">
+          
+					<input type="text" placeholder="有哪些事情需要记录?" ng-model="person.source">
+          <input type="text" placeholder="有哪些事情需要记录?" ng-model="person.link">
+                    <input type="text" placeholder="有哪些事情需要记录?" ng-model="person.title">
+          <input type="text" placeholder="有哪些事情需要记录?" ng-model="person.age">
+ -->
+
+<ion-content>
+
+
+
+<form ng-submit="editcurPerson()" name="editcurUser">
+
+<div class="list">
+
+     <label class="item item-input">
+     	名字：
+          <input type="text" required placeholder="{{curUser.name}}" ng-model="curUser.name">
+        <!--
+          -->
+     </label>
+		 <label class="item item-input">
+          <input type="password" required placeholder="{{curUser.alias}}" ng-model="curUser.alias">
+        <!--
+          -->
+     </label>
+     <label class="item item-input">
+          <input type="text" placeholder="{{curUser.title}}" ng-model="curUser.title">
+        <!--
+          -->
+     </label>
+          <label class="item item-input">
+          <input type="text" placeholder="{{curUser.age}}" ng-model="curUser.age">
+        <!--
+          -->
+     </label>
+     </label>
+          <label class="item item-input">
+          <input type="text" placeholder="{{curUser.mobile}}" required ng-model="curUser.mobile">
+        <!--
+          -->
+     </label>
+</div>
+
+
+
+<div class="padding">
+
+     <button type="submit" ng-disabled="editcurUser.$invalid" class="button button-block button-positive">编辑管理员账户</button>
+
+</div>
+
+</form>
+
+
+
+</ion-content>
+
+
+
+</div>

@@ -1,0 +1,14 @@
+{
+  "name": "HelloIonic",
+  "private": "true",
+  "devDependencies": {
+    "ionic": "driftyco/ionic-bower#1.2.4"
+  },
+  "resolutions": {
+    "angular": ">= 1.0.8"
+  },
+  "dependencies": {
+    "ionic-datepicker": "^1.2.1",
+    "ion-tree-list": "^0.0.10"
+  }
+}

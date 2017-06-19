@@ -1,0 +1,19 @@
+﻿	      <button class="button  button-icon icon ion-settings positive"">
+         <!-- 这里可以用来显示部门的东西----{{item.clapse}}-->
+        {{item.name}}
+      </button>
+      <!--
+	<ion-tree-list items="item.persons" collapsed="{{item.clapse}}"></ion-tree-list>
+-->
+    <!-- 用这种方式可以添加不同的界面来实现部门的管理，人员的展开，并且可以取得人员的属性-->
+    <ion-list  ng-hide="item.clapse">
+      <ion-item class="item-remove-animate item-avatar item-icon-right calm-bg" ng-repeat="person in item.persons"  type="item-text-wrap" href="#/tab/chats/{{person.chatid}}">
+        <!-- <img ng-src="{{chat.face}}"><span class="badge badge-assertive">{{chat.msgNums}}</span>-->
+        <!-- 这里可以用来显示人-->
+        <i class="icon ion-chevron-left icon-accessory energized-bg"> <h2>{{person.name}}</h2></i>
+        <!-- 这里可以用来做人员的操作-->
+        <ion-option-button class="button-positive" ng-click="remove(chat)">
+          查岗
+        </ion-option-button>
+      </ion-item>
+    </ion-list>

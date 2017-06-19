@@ -1,0 +1,23 @@
+﻿<ion-view view-title="辖区设施">
+	<a class="button icon-left ion-chevron-left button-clear button-dark" href="#/tab/management"></a>
+  <ion-content >
+	<div class="item item-divider">
+	   景区景点维护情况
+	</div>
+  <div class="item item-text-wrap">
+	<canvas id="line" class="chart chart-line" chart-data="data" chart-labels="labels" chart-legend="true" 
+		chart-series="series" chart-options="{showTooltips: true}">
+		
+	</canvas>
+	</div>
+		<div class="item item-divider">
+	    景区设备维护情况
+	</div>
+	<div class="item item-text-wrap">
+	<canvas id="Bar" class="chart chart-Bar" chart-data="bardata"  chart-legend="true" chart-options="{showTooltips: true}">
+		
+	</canvas>
+	</div>
+	{{initChart()}}
+  </ion-content>
+</ion-view>

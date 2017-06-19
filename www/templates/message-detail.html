@@ -1,0 +1,94 @@
+﻿
+<ion-view view-title="与{{curSender.name}}的工作消息">
+  <ion-nav-buttons side="left" ng-if="showMauualBackBtn">
+    <a class="button button-icon icon ion-ios-arrow-thin-left" ng-click="back()">返回消息列表</a>
+  </ion-nav-buttons>
+<ion-content class="rj-stable-content" delegate-handle="messageDetailsScroll" id="message-detail-content">
+
+
+  <ion-refresher pulling-text="..." on-refresh="doRefresh()" pulling-icon=""></ion-refresher>
+  <div ng-repeat="item in messageDetils">
+    <p class="rj-message-time" ng-bind="item.create_date"></p>
+    <div class="rj-message-wrap"  ng-if="item.receiver==curUser._id">
+      <!--<img ng-src="{{message.pic}}" class="rj-head-pic">ng-if="!item.isFromeMe"-->
+      <img   ng-src="data:image/jpeg;base64,{{curSender.pic}}" class="rj-head-pic"><br>
+
+      <span class="rj-triangle-left" ng-if="item.text">
+<!--<video  preload  class="rj-head-video-right"> <source ng-src="{{ applicationServer+'videos/'+item.video |trusted}}" type="video/mp4"/></video>-->
+
+      </span>
+      <p class="rj-message" ng-bind="item.text" ng-if="item.text">
+
+
+      </p>
+      <button class="button button-icon icon ion-volume-medium" ng-if="item.voice" ng-click="playVoice('{{fileServer+''+item.voice}}')">
+        播放声音
+      </button>
+      <button class="button button-icon icon ion-image" ng-if="item.image"  ng-click="showImage('{{fileServer+''+item.image}}')">
+        查看图片
+      </button>
+      <button class="button button-icon icon ion-film-marker" ng-if="item.video" ng-click="playVideo('{{fileServer+''+item.video}}')">
+        播放视频
+      </button>
+    </div>
+    <div class="rj-message-wrap" ng-if="item.sender._id==curUser._id">
+      <button class="button button-icon icon ion-image" ng-if="item.image"  ng-click="showImage('{{fileServer+''+item.image}}')">
+        查看图片
+      </button>
+      <button class="button button-icon icon ion-film-marker" ng-if="item.video" ng-click="playVideo('{{fileServer+''+item.video}}')">
+        播放视频
+      </button>
+      <button class="button button-icon icon ion-volume-medium" ng-if="item.voice" ng-click="playVoice('{{fileServer+''+item.voice}}')">
+        播放声音
+      </button>
+      <img  ng-src="data:image/jpeg;base64,{{curUser.images.coverSmall}}" class="rj-head-pic-right">
+      <span class="rj-triangle-right" ng-if="item.text">
+
+
+<!--<section class="video" ng-video ng-if="item.video">
+      </section>-->
+      </span>
+      <p class="rj-message-right" ng-bind="item.text" ng-if="item.text">
+
+      </p>
+      &nbsp;&nbsp;
+    </div>
+  </div>
+  <div class="rj-message-wrap">
+    <br>
+    <br>
+  </div>
+
+</ion-content>
+<ion-footer-bar align-title="left" class="bar-light" resize-foot-bar>
+ <div class="buttons rj-footer-buttons-left">
+   <button
+           ng-class="{'button button-icon icon ion-ios-mic-outline':!isRecVoice,'button button-icon icon ion-ios-keypad':isRecVoice}"
+           ng-click="isRecVoice=!isRecVoice" >
+   <!--录音的话筒-->
+   </button>
+   <button class="button button-icon icon ion-ios-plus-outline " ng-click="showImageUploadChoices()">
+   </button>
+  </div>
+
+  <label class="item item-input rj-footer-input">
+    <button
+      ng-class="{'button button-icon icon ion-ios-mic-outline':!isrec,'button button-icon icon ion-ios-mic':isrec}"
+      ng-if="isRecVoice" on-hold="rec_voice()" on-release="endrec_voice()" >
+      长按开始录音
+    </button>
+    <ion-spinner icon="spiral" ng-show="isrec"  ng-if="isRecVoice"></ion-spinner>
+    <textarea msd-elastic ng-model="unSendMessage.text" ng-if="!isRecVoice" ></textarea>
+    <!--<div class="buttons">-->
+    <!--<button class="rj-footer-btn button button-icon icon ion-happy-outline"></button> ng-show="!send_content || send_content === ''" -->
+    <!--</div>-->
+
+  </label>
+  <div class="rj-footer-btn-wrap">
+    <!---->
+    <div class="rj-send-button" ng-show="(unSendMessage.text && unSendMessage.text != '')||(unSendMessage.video && unSendMessage.video != '')||(unSendMessage.image && unSendMessage.image != '')||(unSendMessage.voice && unSendMessage.voice != '')" ng-click="sendMessage()">
+    <p>发&nbsp;送</p>
+  </div>
+  </div>
+</ion-footer-bar>
+</ion-view>

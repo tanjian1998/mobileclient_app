@@ -1,0 +1,122 @@
+﻿<script id="templates/selectDepartmentModal.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-positive">
+      <h1 class="title">选择用户所在单位</h1>
+      <button class="button button-clear button-primary" ng-click="modal.hide()">退出</button>
+    </ion-header-bar>
+    <ion-content class="padding">
+      <div class="list">
+        <li ng-repeat="item in alldepartments">
+          <div  class="row  row-center" >
+            <div  class="col" >
+              <ion-checkbox
+                ng-model="item.checked"
+                ng-checked="item.checked" class="item-text-wrap">
+                {{ item.name }}
+
+              </ion-checkbox> </div>
+            <div  class="col" >
+              身份：
+              <select ng-model="item.role" ng-options="color.name for color in roleInDepartment" >
+                <!--<option>负责人</option>-->
+                <!--<option selected="">副负责人</option>-->
+                <!--<option>员工</option>-->
+                <!--<option  value="{{$index}}" ng-repeat="t in staffTypes">{{t}}</option>-->
+                <option  value="">请选择</option>
+              </select></div>
+          </div>
+        </li></div>
+        <button class="button button-full button-positive" ng-click="selectedDepartment()">确定</button>
+
+    </ion-content>
+  </ion-modal-view>
+</script>
+
+<ion-view view-title="用户注册">
+		<ion-nav-buttons side="left">
+
+      </ion-nav-buttons>
+    <!-- hidden="{{hideAccountEditForm}}"			<form ng-submit="editcurPerson()" name="editcurUser">
+				-->
+ 			<ion-content scroll="true" direction="y"  has-bouncing="false">
+
+				<div class="list">
+								     <label class="item item-input">
+				     	身份证照片：
+   					<img src="data:image/jpeg;base64,{{$root.curUser.images.coverSmall}}" style="max-width:100px;max-height:150px;">
+				        <!--
+				          -->
+				     </label>
+				     <label class="item item-input">
+				     	名字（必须）：
+				          <input type="text" required placeholder="{{$root.curUser.name}}" ng-model="$root.curUser.name">
+				        <!--
+				          -->
+				     </label>
+						 <label class="item item-input">
+						 	性别：
+				          <input type="text" required placeholder="{{$root.curUser.sex}}" ng-model="$root.curUser.sex">
+				        <!--
+				          -->
+				     </label>
+				     <label class="item item-input">
+				     	民族：
+				          <input type="text" placeholder="{{$root.curUser.nation}}" ng-model="$root.curUser.nation">
+				        <!--
+				          -->
+				     </label>
+				     <label class="item item-input">
+				          	生日：
+				          <input type="text" placeholder="{{$root.curUser.birthday}}" ng-model="$root.curUser.birthday">
+				        <!--
+				          -->
+				     </label>
+				    <label class="item item-input">
+				          	住所：
+				          <input type="text" placeholder="{{$root.curUser.residence}}" ng-model="$root.curUser.residence">
+				        <!--
+				          -->
+				     </label>
+				    <label class="item item-input">
+				          	身份证号码（必须）：
+				          <input type="text" placeholder="{{$root.curUser.idNum}}" ng-model="$root.curUser.idNum">
+				        <!--
+				          -->
+				     </label>
+          <button type="button"  ng-class="{true: 'button  button-block  ion-checkmark-round button-balanced', false: 'button button-block button-positive'}[departMentSetRight]"  ng-click="selectDepartment()">选择所在单位（必须）</button>
+				   <!--uuid是自动获取的，所以不用填
+				   <label class="item item-input">-->
+				          	<!--手机UUID：-->
+				          <!--<input type="text" placeholder="{{$root.curUser.mobileUUid}}" required ng-model="$root.curUser.mobileUUid">-->
+				        <!--&lt;!&ndash;-->
+				          <!--&ndash;&gt;-->
+				     <!--</label>-->
+				   <label class="item item-input">
+				          	手机号码：
+				          <input type="text" placeholder="{{$root.curUser.mobile}}" required ng-model="$root.curUser.mobile">
+				        <!--
+				          -->
+				     </label>
+				</div>
+
+
+
+				<div class="padding">
+
+				     <button type="submit"  class="button button-block button-positive" ng-click="
+										editcurPerson()">确认注册</button>
+          <button type="button"  class="button button-block button-energized" ng-click="
+										gobacktoIDpic()">再次识别</button>
+				</div>
+				 <!--	</form>
+				          -->
+
+
+
+        </ion-content>
+
+
+
+
+
+</ion-view>

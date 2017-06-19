@@ -1,0 +1,84 @@
+﻿<ion-view view-title="用户注册">
+		<ion-nav-buttons side="left">
+
+      </ion-nav-buttons>
+    <!-- hidden="{{hideAccountEditForm}}"-->
+ 			<ion-content scroll="true" direction="y"  has-bouncing="false">
+				<form ng-submit="editcurPerson()" name="editcurUser">
+				
+				<div class="list">
+								     <label class="item item-input">
+				     	身份证照片：				         
+   					<img src="{{$root.curUser.idUrl}}" style="max-width:80%;max-height:30%;">  
+				        <!--
+				          -->
+				     </label>
+				     <label class="item item-input">
+				     	名字：
+				          <input type="text" required placeholder="{{$root.curUser.name}}" ng-model="$root.curUser.name">
+				        <!--
+				          -->
+				     </label>
+						 <label class="item item-input">
+						 	性别：
+				          <input type="text" required placeholder="{{$root.curUser.sex}}" ng-model="$root.curUser.sex">
+				        <!--
+				          -->
+				     </label>
+				     <label class="item item-input">
+				     	民族：
+				          <input type="text" placeholder="{{$root.curUser.nation}}" ng-model="$root.curUser.nation">
+				        <!--
+				          -->
+				     </label>
+				     <label class="item item-input">
+				          	生日：
+				          <input type="text" placeholder="{{$root.curUser.birthday}}" ng-model="$root.curUser.birthday">
+				        <!--
+				          -->
+				     </label>
+				    <label class="item item-input">
+				          	住所：
+				          <input type="text" placeholder="{{$root.curUser.residence}}" ng-model="$root.curUser.residence">
+				        <!--
+				          -->
+				     </label>
+				    <label class="item item-input">
+				          	身份证号码：
+				          <input type="text" placeholder="{{$root.curUser.idNum}}" ng-model="$root.curUser.idNum">
+				        <!--
+				          -->
+				     </label>
+				     
+				   <label class="item item-input">
+				          	手机UUID：
+				          <input type="text" placeholder="{{$root.curUser.mobileUUid}}" required ng-model="$root.curUser.mobileUUid">
+				        <!--
+				          -->
+				     </label>
+				   <label class="item item-input">
+				          	手机号码：
+				          <input type="text" placeholder="{{$root.curUser.mobile}}" required ng-model="$root.curUser.mobile">
+				        <!--
+				          -->
+				     </label>
+				</div>
+				
+				
+				
+				<div class="padding">
+				
+				     <button type="submit"  class="button button-block button-positive">确认注册</button>
+				
+				</div>
+				
+				</form>
+				     		
+     		
+        </ion-content>        
+
+
+       
+     		
+
+</ion-view>

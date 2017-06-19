@@ -1,0 +1,50 @@
+﻿<!--
+  This template loads for the 'tab.friend-detail' state (app.js)
+  'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+  The FriendsCtrl pulls data from the Friends service (service.js)
+  The Friends service returns an array of friend data
+-->
+<ion-view view-title="{{chat.name}}">
+			<ion-nav-back-button side="left">
+ <i class="ion-arrow-left-c"></i> Back
+    </ion-nav-back-button>
+  <ion-content class="padding">
+	<div class="row" style="height:80px">
+	  <div class="col col-50  col-center balanced-bg light" style="height:100%;width: 100%">  <!--  style="height:100px"-->
+ 	        <img ng-src="{{chat.face}}" style="width: 60px; height: 60px">
+  
+	  </div>
+	  <div class="col col-50 col-center light stable-bg"  style="height:100%;width: 100%" >	      <!-- -->
+					          <img ng-src="{{chat.anotherface}}" style="width: 60px; height: 60px">
+
+    
+					   </div>	  
+  </div>
+  	<div class="row" style="height:70px">
+	  <div class="col col-50  col-center dark-bg light" style="height:100%;width: 100%">  <!--  style="height:100px"-->
+
+      {{chat.lastText}}
+ 
+	  </div>
+	  <div class="col col-50 col-center light dark-bg"  style="height:100%;width: 100%" >	      <!-- -->
+
+      {{chat.anotherlastText}}
+
+					   </div>	  
+  </div>		  
+    <ion-list>
+		  <ion-item ng-repeat="item in chat.msgs">
+		  	 <p >
+		       {{item.name}}：{{item.text}}
+		    </p>
+		     <p  class="balanced-bg light">
+		      {{item.time}}
+		    </p>
+		    <p  class="positive light">
+		      {{item.location}}
+		    </p>
+		    <img ng-src="{{item.img}}" style="width: 120px; height: 120px">
+		  </ion-item>
+		</ion-list>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,56 @@
+﻿<ion-view view-title="案件上报">
+		<ion-nav-buttons side="left">
+
+       <!-- <a class="button icon-left ion-chevron-left button-clear button-dark" href="#/tab/management"></a>-->
+    </ion-nav-buttons>
+    
+
+        <ion-content scroll="true" direction="xy"  has-bouncing="false"  style="height:100%;width: 100%">
+
+					
+						<div class="row" style="height:{{rowHeight}}px">
+					  <div class="col col-50  col-center calm-bg light" style="height:100%;width: 100%">  <!--  style="height:100px"-->
+				 	     <!--<button class="button button-calm icon-top icon ion-home" style="height:100%;width: 100%"><br></>辖区设施</button>
+				 	     	<a class="button button-calm icon-left icon ion-ios-rose-outline" style="height:100%;width: 100%"  href="#/tab/chats/0"><br>垃圾清运
+				 	     </a> -->
+				 	     
+				 	     <button class="button button-calm icon-left icon ion-ios-rose-outline"  style="height:100%;width: 100%" ng-click="onClickShowChatDetail(0)"><br></>垃圾清运</button>
+
+					  </div>  
+				
+					   <div class="col col-50 col-center light stable-bg"  style="height:100%;width: 100%" >	      <!-- -->
+					       
+					  				<a class="button  button-stable icon-left icon ion-ios-pint-outline" style="height:100%;width: 100%"  href="#/tab/chats/1"><br>设施损坏
+				 	     </a>
+					   </div>	   
+					</div>	
+					<div class="row" style="height:{{rowHeight}}px">
+					  <div class="col col-50  col-center calm-bg light" style="height:100%;width: 100%">  <!--  style="height:100px"-->
+				 	     <!--				 	     	<a class="button button-stable icon-left icon ion-ios-home-outline" style="height:100%;width: 100%"  href="#/tab/chats/1"><br>违章建筑
+				 	     </a>-->
+				 	     <button class="button button-stable icon-left icon ion-ios-home-outline" style="height:100%;width: 100%" ng-click="onClickSendMesBtn()"><br></>违章建筑</button>
+
+					  </div>  
+				
+					   <div class="col col-50 col-center light stable-bg"  style="height:100%;width: 100%" >	      <!-- -->
+					   		<!--	<a class="button  button-calm  icon-left icon ion-person"   style="height:100%;width: 100%"  href="#/tab/managementsendmessage"><br>公共安全
+				 	     </a>-->
+				 	     <button class="button  button-calm  icon-left icon ion-person"  style="height:100%;width: 100%" ng-click="onClickSendMesBtn()"><br></>公共安全</button>
+					   </div>	   
+					</div>	
+											<div class="row" style="height:{{rowHeight}}px">
+					  <div class="col col-50  col-center calm-bg light" style="height:100%;width: 100%">  <!--  style="height:100px"-->
+				 	     <!--<button class="button button-calm icon-top icon ion-home" style="height:100%;width: 100%"><br></>辖区设施</button>-->
+				 	     	<a class="button button-calm icon-left icon ion-ios-barcode-outline" style="height:100%;width: 100%"  href="#/tab/managementinstallations"  href="#/tab/managementsendmessage"><br>汛情速报
+				 	     </a>
+					  </div>  
+				
+					   <div class="col col-50 col-center light stable-bg"  style="height:100%;width: 100%" >	      <!-- -->
+					   	<a class="button  button-stable icon-left icon  ion-ios-baseball-outline"  style="height:100%;width: 100%"  href="#/tab/managementsendmessage"><br>台风损害
+				 	     </a>
+					        
+					   </div>	   
+					</div>	
+
+        </ion-content>
+</ion-view>

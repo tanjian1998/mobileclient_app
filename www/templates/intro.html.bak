@@ -1,0 +1,146 @@
+﻿<ion-view>
+    <ion-nav-buttons side="left">
+
+        <button class="button button-light" ion-wizard-previous>
+            Back
+        </button>
+   <!--        <button class="button button-light"
+                ng-click="listenbackbutton()">
+            关闭程序
+        </button>-->
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+    	
+        <button class="button button-light" ion-wizard-next>
+            Next
+        </button>
+           <!--这种条件就是时刻都在判断 condition="startCondition()"-->
+        <button class="button button-light" ion-wizard-start="startCondition()">
+            Start App
+        </button>
+    </ion-nav-buttons>
+    <ion-slides options="swiperOptions" slider="swiper" ion-wizard>
+    	   <!--导航第一页，欢迎
+    	    next-condition="step1.something"
+    	                            <div class="item item-text-wrap">
+                            <input type="text" placeholder="Type something" ng-model="step1.something" autocomplete="off">
+                        </div>
+    	    -->
+        <ion-slide-page ion-wizard-step>
+            <ion-content class="has-header">
+            <div class="row">
+                <div class="col col-center">
+                    <div class="card rounded">
+                        <div class="item">
+                                 <h2 class="positive">欢迎使用崖州区网格化管理信息系统</h2>                   	
+   					 								<img src="./img/intro/1page.jpg" style="max-width:98%;max-height:30%;align:center;">  
+
+                        </div>
+									
+                    </div>
+                </div>
+            </div> 
+                       <div class="row">
+           	<div class="col col-center">
+ 
+               </div>
+            </div> 
+           <div class="row">
+           	<div class="col col-center">
+								<div class="item item-text-wrap">
+                            <p>
+														powered by:中国科学院遥感与数字地球研究所
+                            </p>
+                        </div>   
+               </div>
+            </div> 
+            </ion-content>
+        </ion-slide-page>
+           <!--导航第二页，介绍
+            next-condition="step2.name" prev-condition="!step2.name"
+           -->
+        <ion-slide-page ion-wizard-step>
+            <ion-content class="has-header">
+            <div class="row">
+                <div class="col col-center">
+                    <div class="card rounded">
+                        <div class="item item-text-wrap">
+                        	
+   					 								<img src="./img/intro/2page.jpg" style="max-width:98%;max-height:30%;align:center;">  
+                            <h2 class="positive" style="max-width:98%;align:center;">本终端供网格化管理人员使用，兼容Android和IOS系统</h2>
+                            <h4 class="calm">社会公众请关注微信公众号</h4>
+                        </div>
+									
+                    </div>
+                </div>
+            </div> 
+           <div class="row">
+           	<div class="col col-center">
+								<div class="item item-text-wrap">
+                            <p>
+														powered by:中国科学院遥感与数字地球研究所
+                            </p>
+                        </div>   
+               </div>
+            				</div>          
+            	</div>   
+             </div>
+            </ion-content>
+        </ion-slide-page>
+       <!--导航第三页，介绍身份证如何拍照class="has-header"-->
+        <ion-slide-page ion-wizard-step class="has-header">
+            	<ion-content >
+            <div class="row">
+            	 <div class="col col-center">
+
+                    <h3 class="calm"> 首次注册</h3>
+                    <h3 class="balanced">第一步：<p class="dark">请找出本人身份证，确认上面文字清晰</p></h3>     
+   					 <img src="./img/intro/3page.jpg" style="min-width:200px;max-width:98%;max-height:30%;">                 
+                </div>
+            </div>
+            <div class="row">
+            	
+   					 
+           <div class="col col-center">
+<h3 class="balanced">
+   					                     	第二步：<p class="dark">请用手机背部摄像头拍摄身份证正面，拍摄距离以身份证距手机10公分到20公分为宜，请对焦，保持图片清晰</p></h3>
+                              
+   					 <img src="./img/intro/4page.jpg" style="min-width:200px;max-width:98%;max-height:30%;">  
+   					                     </div>
+            </div>
+                 <div class="row">
+           <div class="col col-center">
+
+   					                     <h3 class="balanced">
+   					                     	第三步：<p class="dark">拍照后请将图片框缩小到身份证大小，左右不超过1公分</p></h3>
+                              </div>
+            </div>
+                             <div class="row">
+           <div class="col col-center">
+
+   					                     <h3 class="balanced">
+   					                     	第四步：<p class="dark">上传图片，等待识别结果，如遇网络问题、图片选择错误、拍摄不清晰，请重试</p></h3>
+                              </div>
+            </div>
+                                         <div class="row">
+           <div class="col col-center">
+
+   					                     <h3 class="assertive">
+   					                     	注意：<p class="assertive">每人每天仅可以进行10次身份证识别，请仔细操作！</p></h3>
+                              </div>
+            </div>
+                       <div class="row">
+                       	
+           	<div class="col col-center">
+								<div class="item item-text-wrap">
+                            <p>
+														powered by:中国科学院遥感与数字地球研究所
+                            </p>
+                        </div>   
+               </div>
+            </div> 
+            </ion-content>
+        </ion-slide-page>
+    </ion-slides>
+
+</ion-view>

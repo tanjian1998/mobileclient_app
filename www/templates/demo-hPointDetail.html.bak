@@ -1,0 +1,80 @@
+﻿<div class="modal"  style="height: 600px;">
+
+
+
+<!-- 窗口标题和取消按钮 -->
+
+<ion-header-bar class="bar-secondary">
+
+     <h1 class="title">查看文化遗产</h1>
+
+
+</ion-header-bar>
+
+
+
+
+<ion-content>
+
+
+
+<form>
+<div class="item item-center">
+
+
+    <img ng-src="./img/news/{{curHeritpoint.icon}}" style="width: 160px; height: 140px; align:center;">    
+</div>
+<div class="list">
+
+     <label class="item item-input">
+          名称：
+         <input type="text" placeholder="{{curHeritpoint.name}}" ng-model="curHeritpoint.name">
+     </label>
+		 <label class="item item-input">
+		 	   位置：
+        <input type="text" placeholder="{{curHeritpoint.location}}" ng-model="curHeritpoint.location">
+     </label>
+     <label class="item item-input">
+        文化遗产简介：
+        <!--
+          -->
+          <input type="text" placeholder="{{curHeritpoint.info}}" ng-model="curHeritpoint.info">
+     </label>
+     <label class="item item-input">
+        文化遗产详细：
+        <!-- 
+          <a href='#' onclick='window.open(\"{{curHeritpoint.des}}\")'>详细信息</a>
+          -->
+         <input type="text" placeholder="{{curHeritpoint.des}}" ng-model="curHeritpoint.des">
+    <!--  </label>
+          <label class="item item-input">
+          文化遗产全景图管理：
+          
+                  <button class="button button-positive">添加
+          </button>          <button class="button button-calm">删除
+          </button>          <button class="button button-balanced">查看
+          </button>
+     </label>-->
+    
+</div>
+
+
+
+<div class="row">
+
+  <div class="col col-center">		<button class="button button-block button-positive" ng-click="closeAbout()">确定</button></div>
+  
+  <div class="col col-center"><button class="button button-block button-positive" ng-click="closeAbout()">关闭</button></div>
+	
+     
+</div>
+
+</form>
+
+
+
+</ion-content>
+
+
+
+</div>

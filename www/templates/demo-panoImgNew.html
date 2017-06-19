@@ -1,0 +1,79 @@
+﻿<div class="modal" style="height: 600px;">
+
+
+
+<!-- 窗口标题和取消按钮 -->
+
+<ion-header-bar class="bar-secondary">
+
+     <h1 class="title">添加全景图</h1>
+
+
+</ion-header-bar>
+
+
+
+<ion-content>
+
+
+
+<form name="newPanoImg">
+	<div class="row">
+<div  class="col col-50">          
+    <fileupload id="fileupload" filedir="uploadPano" on-create=""></fileupload>
+</div>
+<div  class="col col-50">    
+    <img ng-src="{{panobaseurl}}{{panoImgurl}}" style="width: 160px; height: 140px; align:center;"> 
+
+</div>
+</div>
+<div class="list" >
+
+     <label class="item item-input">
+          名称：
+         <input type="text" placeholder="全景图叫什么?" required 
+  	ng-show="panouploaded" 
+          ng-model="newPanoImg.name">
+     </label>
+     <label class="item item-input">
+		 	  拍摄时间：
+        <input type="number" 
+  	ng-show="panouploaded" 
+        placeholder="全景图啥时候拍的?" ng-model="newPanoImg.date">
+ 			</label>
+ 			<label class="item item-input">
+        拍摄者： 
+        <input type="number" placeholder="全景图谁拍的?" 
+  	ng-show="panouploaded" 
+        ng-model="newPanoImg.handler">
+     	</label>
+     	<label class="item item-input">
+        所属文化遗产： 
+        	<select ng-model="newPanoImg.hpFK" ng-options="item._id as item.name for item in allHpts">     
+      		</select>
+      	</label>
+</div>
+
+
+
+<div class="row">
+
+  <div class="col col-center">		
+  <button class="button button-block button-positive" 
+  	ng-disabled="newPanoImg.$invalid"
+  	ng-click="confirmAddPanoImgWin(newPanoImg)">确定</button></div>
+  
+  <div class="col col-center"><button class="button button-block button-positive" ng-click="closeAddWin()">关闭</button></div>
+	
+     
+</div>
+
+</form>
+
+
+
+</ion-content>
+
+
+
+</div>

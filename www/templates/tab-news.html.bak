@@ -1,0 +1,50 @@
+﻿<ion-view class="bar-positive" view-title="崖州要闻">
+	<ion-nav-buttons side="left">
+       <button class="button button-icon icon ion-ios-minus-outline"
+          ng-click="data.showDelete = !data.showDelete; data.showReorder = false"></button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+      <button class="button"  ng-show="{{editable}}" ng-click="addHpoint()">
+            添加
+        </button>
+    </ion-nav-buttons><!---->
+  <ion-content>
+			<ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
+
+        <ion-item ng-repeat="item in heritagePoints" 
+                  item="item"
+                  ng-click="newAbout(item)" class="item-stable item-remove-animate item-text-wrap">
+                  <div class="row">
+									  <div class="energized-bg calm col col-80">          
+									  	<!--Item {{ item.id }}									         -->
+												    <h2 class="royal">{{item.name}}</h2>
+												    <p  class="light-bg">{{item.info}}</p>
+									  </div>
+									  <div class="royal-bg col"> 
+									  	<img ng-src="./img/{{item.icon}}"  style="width:40px; height: 40px" side="right">
+									  	<!--<img ng-src="{{hpImgBaseUrl}}{{item.img}}"  style="width:40px; height: 40px" side="right"></div>
+									--></div>
+
+			    <ion-option-button class="button-positive"
+			                       ng-click="lookthepano(item)">
+			      查看全景图
+			    </ion-option-button>
+         <!-- <ion-delete-button class="ion-minus-circled" 
+                             ng-click="onItemDelete(item)">
+          </ion-delete-button>
+           <ion-reorder-button class="ion-navicon" on-reorder="moveItem(item, $fromIndex, $toIndex)"></ion-reorder-button>
+          -->
+          <ion-option-button ng-show="{{editable}}" class="button-assertive"
+                             ng-click="edit(item)">
+            编辑
+          </ion-option-button>
+          <ion-option-button ng-show="{{editable}}" class="button-calm"
+                             ng-click="onItemDelete(item)">
+            删除
+          </ion-option-button>
+         
+        </ion-item>
+
+      </ion-list>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,13 @@
+  <ion-pane  ng-click="closeModal()">
+    <ion-list   rj-close-back-drop  ng-if="movingObjs && movingObjs.length > 0" >
+      <!--ng-if="person.person.messageabstract"on-hold="popupMessageOpthins(person.person)" ng-repeat="person in node.persons| orderBy:'person.messagelastTime'" -->
+      <ion-item class="item-avatar" ng-class="{'rj-item-top': person.type=='curUser'}" ng-if="person._id!='' && person.name!=''"  rj-hold-active ng-repeat="person in movingObjs" ng-click="messageDetils(person)">
+        <img ng-src="data:image/jpeg;base64,{{person.images.coverSmall}}">
+        <span class="rj-sm-red-icon" ng-show="person.onlineStatus"><p ng-bind="person.onlineStatus"></p></span>
+        <h2 ng-bind="person.name"></h2>
+        <p class="rj-list-p" ng-bind="person.gridInfo"></p>
+        <!--<span class="rj-push-right" ng-bind="person.onlineStatus"></span>-->
+      </ion-item>
+    </ion-list>
+  </ion-pane>
+

@@ -1,0 +1,40 @@
+﻿<!--
+Create tabs with an icon and label, using the tabs-positive style.
+Each tab's child <ion-nav-view> directive will have its own
+navigation history that also transitions its views in and out.
+-->
+<ion-tabs class="tabs-icon-top tabs-color-active-positive">
+
+  <!-- Dashboard Tab ion-ios-bookmarks-outlin ion-ios-bookmarkse-->
+  <ion-tab title="网格管理"   hidden="{{hideAccountTab}}"  icon-off="icon ion-earth" icon-on="icon ion-android-compass" href="#/tab/dash">
+    <ion-nav-view name="tab-dash"></ion-nav-view>
+  </ion-tab>
+
+  <!-- management Tab -->
+  <ion-tab title="政务管理"  hidden="{{hideAccountTab}}" icon-off="ion-ios-paper-outline" icon-on="ion-ios-paper" href="#/tab/management">
+    <ion-nav-view name="tab-management"></ion-nav-view>
+  </ion-tab>
+
+  <!-- Chats Tab ion-ios-people-outline-->
+  <ion-tab title="工作消息"   hidden="{{hideAccountTab}}"  icon-off="icon ion-chatbubble" icon-on="icon ion-chatbubble-working" href="#/tab/chats">
+    <ion-nav-view name="tab-chats"></ion-nav-view>
+  </ion-tab>
+
+    <!-- management Tab -->
+  <ion-tab title="本地要闻"   hidden="{{hideAccountTab}}"  icon-off="ion-ios-information" icon-on="ion-ios-information-outline" href="#/tab/news">
+    <ion-nav-view name="tab-news"></ion-nav-view>
+  </ion-tab>
+
+  <!-- department Tab -->
+    <ion-tab title="部门管理"   hidden="true"   icon-off="ion-ios-box-outline" icon-on="ion-ios-box" href="#/tab/department">
+    <ion-nav-view name="tab-department"></ion-nav-view>
+  </ion-tab>
+
+   <!--Account Tab  -->
+  <!--即使不显示，也不能注释掉，因为如果没有tab的根定义，后面的 tab-account系列的页面都不会被载入路由，访问时会自动认为路由不存在-->
+  <ion-tab title="系统设置"  hidden="true"   icon-off="ion-ios-gear-outline" icon-on="ion-ios-gear" href="#/tab/account">
+  <ion-nav-view name="tab-account"></ion-nav-view>
+  </ion-tab>
+
+
+</ion-tabs>

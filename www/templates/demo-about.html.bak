@@ -1,0 +1,91 @@
+﻿<div class="modal">
+
+
+
+<!-- 窗口标题和取消按钮 -->
+
+<ion-header-bar class="bar-secondary">
+
+     <h1 class="title">查询文化遗产</h1>
+
+
+</ion-header-bar>
+
+
+
+<!-- 窗口内容
+var PersonSchema = new Schema({
+name : String,
+alias : [String],
+title : String,
+age:Number,
+create_date : { type: Date, default: Date.now},
+images :{
+coverSmall:String,
+coverBig:String,
+},
+source :String,
+link:String,
+lastmessageFK:Schema.Types.ObjectId,
+lastLocationFK:Schema.Types.ObjectId,
+lastmessage:String,
+lastLocation:String
+/**/
+});
+ <input type="text" placeholder="有哪些事情需要记录?" ng-model="person.alias">
+          <input type="text" placeholder="有哪些事情需要记录?" ng-model="person.title">
+          <input type="text" placeholder="有哪些事情需要记录?" ng-model="person.age">
+          
+					<input type="text" placeholder="有哪些事情需要记录?" ng-model="person.source">
+          <input type="text" placeholder="有哪些事情需要记录?" ng-model="person.link">
+                    <input type="text" placeholder="有哪些事情需要记录?" ng-model="person.title">
+          <input type="text" placeholder="有哪些事情需要记录?" ng-model="person.age">
+ -->
+
+<ion-content>
+
+
+
+<form>
+<div class="item item-center">
+
+
+    <img ng-src="../img/wholeview1.jpg" style="width: 560px; height: 140px; align:center;">    
+</div>
+<div class="list">
+
+     <label class="item item-input">
+          名称：
+         <input type="text" placeholder="文化遗产名称？" ng-model="person.alias">
+     </label>
+		 <label class="item item-input">
+		 	   位置框选：<i class="icon ion-ios-search placeholder-icon"></i>
+        <input type="text" placeholder="文化遗产在什么位置？" ng-model="person.alias">
+     </label>
+
+        
+
+    
+    
+</div>
+
+
+
+<div class="row">
+
+  <div class="col col-center">		<button class="button button-block button-positive" ng-click="closeAbout()">确定</button></div>
+  
+  <div class="col col-center"><button class="button button-block button-positive" ng-click="closeAbout()">关闭</button></div>
+	
+     
+</div>
+
+</form>
+
+
+
+</ion-content>
+
+
+
+</div>

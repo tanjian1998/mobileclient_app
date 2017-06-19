@@ -1,0 +1,91 @@
+﻿<div class="modal">
+
+
+
+<!-- 窗口标题和取消按钮 -->
+
+<ion-header-bar class="bar-secondary">
+
+     <h1 class="title">景点详细信息</h1>
+
+
+</ion-header-bar>
+
+
+
+<!-- 窗口内容
+var PersonSchema = new Schema({
+name : String,
+alias : [String],
+title : String,
+age:Number,
+create_date : { type: Date, default: Date.now},
+images :{
+coverSmall:String,
+coverBig:String,
+},
+source :String,
+link:String,
+lastmessageFK:Schema.Types.ObjectId,
+lastLocationFK:Schema.Types.ObjectId,
+lastmessage:String,
+lastLocation:String
+/**/
+});
+ <input type="text" placeholder="有哪些事情需要记录?" ng-model="person.alias">
+          <input type="text" placeholder="有哪些事情需要记录?" ng-model="person.title">
+          <input type="text" placeholder="有哪些事情需要记录?" ng-model="person.age">
+          
+					<input type="text" placeholder="有哪些事情需要记录?" ng-model="person.source">
+          <input type="text" placeholder="有哪些事情需要记录?" ng-model="person.link">
+                    <input type="text" placeholder="有哪些事情需要记录?" ng-model="person.title">
+          <input type="text" placeholder="有哪些事情需要记录?" ng-model="person.age">
+ -->
+
+<ion-content>
+
+
+
+<form>
+ <div class="row row-center">
+        <div class="col col-center">        	
+    			<img ng-src="img/temple.jpg" style="width: 100%; height: 100%;">
+        </div>
+          </div>
+ <div class="row row-center">
+        <div class="col">
+          古寺所在地五兀峰海拔693米，是夹江县境内
+布袋罗汉像
+布袋罗汉像
+青衣江北岸的最高峰峦，由漹城镇的桃坡、任山、千佛、大石村的群山组成，最高处在任山村的周岩，制高点海拔742米。《夹江县志》（民国版）载：“（五兀山）五峰秀拔，兀然高标，遥连蒙山，俯临列岫。”注释大观山云：“……俯瞰平原，一目百里，县志之主山也。发脉蒙山，经雅安、洪雅等县，绵亘三百余里，结为邑之五兀山，耸翠入云，为众山之宗。此山适承其正支，脉注邑治。” 左思《蜀都赋》“经三峡之峥嵘，蹑五兀之蹇浐。” 后句即指此群峦的崇峻净峥和道路的崎岖曲折。清代邑人李华峰著《青云桥开桥祝文》，文中描述夹江县：“汉嘉首治，古郡南屏，其峰肇脉于蒙山，逦迄五兀而结构。”
+古寺高居峰顶，巨崖突兀，地势高峻雅洁；茂林环拥、树竹遮阴，繁花盛开隐泉涧；碧树烟岚、云蒸霞蔚，流珠泻绿于沟壑；俯瞰雅水，萦带如虹，遥眺化山，如屏对峙。明代邑人张庭，别号五兀山人，曾官至吏部文选郎中，还乡后热心桑梓文教，曾建“五兀书院”于大观山，著有《五兀山人存稿》、《岷峨志》、《夹江志》、《元览要略》等书，现在千佛岩铁石关处尚存张庭书“五兀书院”崖刻。
+        </div>
+          </div>
+          
+ <div class="row row-center">
+        <div class="col">
+          <div class="col-demo">您的当前位置：经度116.27,纬度40.06</div>
+        </div>
+        <div class="col">
+          <div class="col-demo">距离此景点约5公里
+        </div>
+      </div>
+   </div>
+
+
+<div class="padding">
+		
+     <button class="button button-block button-balanced" ng-click="goto3DModel()">查看此景点三维场景</button>
+
+     <button class="button button-block button-positive" ng-click="closeSpotdetail()">关闭</button>
+</div>
+
+</form>
+
+
+
+</ion-content>
+
+
+
+</div>

@@ -1,0 +1,35 @@
+﻿<ion-view view-title="所有可见人员">
+	<!--<ion-nav-buttons side="left">-->
+      <!--<button class="button  icon-left ion-star button-calm" ng-click="personSetting()">-->
+        <!--&lt;!&ndash;修改设置{{ $scope.resMsg}}&ndash;&gt;-->
+        <!--编辑当前用户-->
+      <!--</button>-->
+    <!--</ion-nav-buttons>-->
+    <!--<ion-nav-buttons side="right">-->
+      <!--<button class="button  button-positive  icon-right ion-navicon" ng-click="registePerson()">-->
+         <!--&lt;!&ndash;注册用户&ndash;&gt;-->
+         <!--注册管理员-->
+      <!--</button>-->
+    <!--</ion-nav-buttons>-->
+
+  <ion-content delegate-handle="allPersonsScroll" >
+    <!--<ion-list>
+    <ion-toggle  ng-model="settings.enableFriends">
+        Enable Friends
+    </ion-toggle>
+    </ion-list>-->
+    <ion-refresher pulling-text="刷新地图可见人员..." on-refresh="doRefresh()" pulling-icon="bubbles" class="spinner-balanced"></ion-refresher>
+
+    <ion-list   rj-close-back-drop  ng-if="movingObjs && movingObjs.length > 0" >
+      <!--ng-if="person.person.messageabstract"on-hold="popupMessageOpthins(person.person)" ng-repeat="person in node.persons| orderBy:'person.messagelastTime'" -->
+      <ion-item class="item-avatar" ng-class="{'rj-item-top': person.type=='curUser'}" ng-if="person._id!='' && person.name!='' && person.name!='admin'"  rj-hold-active ng-repeat="person in movingObjs" ng-click="mapDetil(person)">
+        <img ng-src="data:image/jpeg;base64,{{person.images.coverSmall}}">
+        <span ng-class="{'rj-lm-grey-icon':person.onlineStatus=='离线','rj-lm-royalblue-icon':person.onlineStatus=='在线'}" ng-show="person.onlineStatus"><p ng-bind="person.onlineStatus"></p></span>
+        <h2 ng-bind="person.name"></h2>
+        <!--ng-bind="person.gridInfo"-->
+        <p class="rj-list-p" >{{person.gridInfo}}；最新定位坐标：{{person.latestLocation.Location}}</p>
+        <!--<span class="rj-push-right" ng-bind="person.onlineStatus"></span>-->
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
